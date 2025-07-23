@@ -16,10 +16,15 @@ type Lead = {
   email: string | null
   phone: string | null
   company: string | null
+  address: string | null
+  source_id: string | null
   status: "new" | "contacted" | "qualified" | "converted" | "lost"
+  assigned_to: string | null
+  notes: string | null
   created_at: string
-  lead_sources?: { name: string } | null
-  user_profiles?: { full_name: string } | null
+  updated_at: string
+  lead_sources: { name: string } | null
+  user_profiles: { full_name: string } | null
 }
 
 const statusColors = {

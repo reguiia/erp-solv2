@@ -1,3 +1,5 @@
+"use client"
+
 import { LeadsTable } from "@/components/crm/leads-table"
 
 export default function CRMPage() {

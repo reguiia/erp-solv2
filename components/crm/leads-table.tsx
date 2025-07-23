@@ -9,20 +9,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { AddLeadDialog } from "./add-lead-dialog"
 import { getSupabaseClient } from "@/lib/supabase"
 import { Search, Filter } from "lucide-react"
+import type { Tables } from "@/lib/database.types" // Import Tables type
 
-type Lead = {
-  id: string
-  name: string
-  email: string | null
-  phone: string | null
-  company: string | null
-  address: string | null
-  source_id: string | null
-  status: "new" | "contacted" | "qualified" | "converted" | "lost"
-  assigned_to: string | null
-  notes: string | null
-  created_at: string
-  updated_at: string
+type Lead = Tables<"leads"> & {
   lead_sources: { name: string } | null
   user_profiles: { full_name: string } | null
 }
@@ -60,7 +49,8 @@ export function LeadsTable() {
       if (error) {
         console.error("Error fetching leads:", error)
       } else {
-        setLeads(data || [])
+        // Cast data to Lead[] to satisfy TypeScript, as the select query now matches the type
+        setLeads((data as Lead[]) || [])
       }
     } catch (error) {
       console.error("Error fetching leads:", error)

@@ -8,18 +8,12 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { getSupabaseClient } from "@/lib/supabase"
 import { Plus, Search, Filter, Eye } from "lucide-react"
+import type { Tables } from "@/lib/database.types" // Import Tables type
 
-type Project = {
-  id: string
-  name: string
-  status: "draft" | "active" | "completed" | "cancelled"
-  start_date: string | null
-  end_date: string | null
-  budget: number | null
-  created_at: string
-  customers?: { name: string } | null
-  project_types?: { name: string } | null
-  user_profiles?: { full_name: string } | null
+type Project = Tables<"projects"> & {
+  customers: { name: string } | null
+  project_types: { name: string } | null
+  user_profiles: { full_name: string } | null
 }
 
 const statusColors = {
@@ -55,7 +49,7 @@ export function ProjectsTable() {
       if (error) {
         console.error("Error fetching projects:", error)
       } else {
-        setProjects(data || [])
+        setProjects((data as Project[]) || [])
       }
     } catch (error) {
       console.error("Error fetching projects:", error)

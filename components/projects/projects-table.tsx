@@ -17,9 +17,9 @@ type Project = {
   end_date: string | null
   budget: number | null
   created_at: string
-  customers?: { name: string }
-  project_types?: { name: string }
-  user_profiles?: { full_name: string }
+  customers?: { name: string } | null
+  project_types?: { name: string } | null
+  user_profiles?: { full_name: string } | null
 }
 
 const statusColors = {

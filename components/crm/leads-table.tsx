@@ -6,8 +6,9 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { AddLeadDialog } from "./add-lead-dialog"
 import { getSupabaseClient } from "@/lib/supabase"
-import { Plus, Search, Filter } from "lucide-react"
+import { Search, Filter } from "lucide-react"
 
 type Lead = {
   id: string
@@ -17,8 +18,8 @@ type Lead = {
   company: string | null
   status: "new" | "contacted" | "qualified" | "converted" | "lost"
   created_at: string
-  lead_sources?: { name: string }
-  user_profiles?: { full_name: string }
+  lead_sources?: { name: string } | null
+  user_profiles?: { full_name: string } | null
 }
 
 const statusColors = {
@@ -66,8 +67,8 @@ export function LeadsTable() {
   const filteredLeads = leads.filter((lead) => {
     const matchesSearch =
       lead.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      lead.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      lead.company?.toLowerCase().includes(searchTerm.toLowerCase())
+      (lead.email && lead.email.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (lead.company && lead.company.toLowerCase().includes(searchTerm.toLowerCase()))
     const matchesStatus = statusFilter === "all" || lead.status === statusFilter
     return matchesSearch && matchesStatus
   })
@@ -81,10 +82,7 @@ export function LeadsTable() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold">Leads</h2>
-        <Button>
-          <Plus className="h-4 w-4 mr-2" />
-          Add Lead
-        </Button>
+        <AddLeadDialog onLeadAdded={fetchLeads} />
       </div>
 
       {/* Filters */}

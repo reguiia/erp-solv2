@@ -43,7 +43,7 @@ export function StatsCards() {
         .select("*", { count: "exact", head: true })
         .eq("status", "converted")
 
-      const conversionRate = leadsCount ? ((convertedLeads || 0) / leadsCount) * 100 : 0
+      const conversionRate = leadsCount && leadsCount > 0 ? ((convertedLeads || 0) / leadsCount) * 100 : 0
 
       setStats({
         totalLeads: leadsCount || 0,
@@ -61,14 +61,14 @@ export function StatsCards() {
   const cards = [
     {
       title: "Total Leads",
-      value: stats.totalLeads,
+      value: stats.totalLeads.toString(),
       icon: Users,
       color: "text-blue-600",
       bgColor: "bg-blue-100",
     },
     {
       title: "Active Projects",
-      value: stats.activeProjects,
+      value: stats.activeProjects.toString(),
       icon: FolderOpen,
       color: "text-green-600",
       bgColor: "bg-green-100",

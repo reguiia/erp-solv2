@@ -39,11 +39,13 @@ export function LeadsTable() {
     try {
       const { data, error } = await supabase
         .from("leads")
-        .select(`
-          *,
-          lead_sources(name),
-          user_profiles(full_name)
-        `)
+        .select(
+          `
+      *,
+      lead_sources!leads_source_id_fkey(name),
+      user_profiles!leads_assigned_to_fkey(full_name)
+    `,
+        )
         .order("created_at", { ascending: false })
 
       if (error) {

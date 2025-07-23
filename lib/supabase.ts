@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js"
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
+// Create a single supabase client for interacting with your database
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // Singleton pattern for client-side Supabase client
@@ -57,6 +58,29 @@ export type Database = {
           notes: string | null
           created_at: string
           updated_at: string
+        }
+        Insert: {
+          name: string
+          email?: string | null
+          phone?: string | null
+          company?: string | null
+          address?: string | null
+          source_id?: string | null
+          status?: "new" | "contacted" | "qualified" | "converted" | "lost"
+          assigned_to?: string | null
+          notes?: string | null
+        }
+        Update: {
+          name?: string
+          email?: string | null
+          phone?: string | null
+          company?: string | null
+          address?: string | null
+          source_id?: string | null
+          status?: "new" | "contacted" | "qualified" | "converted" | "lost"
+          assigned_to?: string | null
+          notes?: string | null
+          updated_at?: string
         }
       }
       customers: {

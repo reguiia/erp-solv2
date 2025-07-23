@@ -16,7 +16,7 @@ import { Bell, LogOut, User } from "lucide-react"
 export function Header() {
   const { user, userProfile, signOut } = useAuth()
 
-  const getInitials = (name: string | null) => {
+  const getInitials = (name: string | null | undefined) => {
     if (!name) return "U"
     return name
       .split(" ")

@@ -8,6 +8,8 @@ importers:
 
   .:
     dependencies:
+       next-themes: 0.2.1
+      '@types/next-themes': 0.2.0
       '@radix-ui/react-avatar':
         specifier: ^1.0.4
         version: 1.0.4(@types/react-dom@18.0.0)(@types/react@18.0.0)(react-dom@18.0.0(react@18.0.0))(react@18.0.0)
@@ -93,6 +95,20 @@ packages:
   '@alloc/quick-lru@5.2.0':
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
+
+    /next-themes/0.2.1:
+    resolution:
+      integrity: sha512-<some-hash> # <- This is required
+    peerDependencies:
+      react: ^17.0.0 || ^18.0.0
+    dev: false
+
+  /@types/next-themes/0.2.0:
+    resolution:
+      integrity: sha512-<some-hash>
+    dependencies:
+      '@types/react': ^17 || ^18
+    dev: true
 
   '@babel/runtime@7.27.6':
     resolution: {integrity: sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q==}
